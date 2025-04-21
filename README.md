@@ -12,11 +12,13 @@ CryptoScrapper (code)
 ```
 
 ## Crypto supported
-Currently, only 3 cryptos are support
+Currently, only 3 cryptos have custom logo
 | Crypto | Code | 
 |----------|----------|
 | Bitcoin  | btc   | 
 | Etheruem  | eth |
 | Solana   | sol   | 
+
+Other will have default logo
 
 
