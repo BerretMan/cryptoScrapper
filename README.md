@@ -11,7 +11,7 @@ CryptoScrapper (code)
 ```
 
 ## Crypto supported
-Currently, only 3 cryptos are supported
+Currently, only 3 cryptos are support
 | Crypto | Code | 
 |----------|----------|
 | Bitcoin  | btc   | 
