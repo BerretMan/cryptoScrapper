@@ -1,5 +1,6 @@
 # cryptoScrapper
-A minimalist tool to web scrap price of some crypto on https://coinmarketcap.com/
+A minimalist tool to get the pricce of some crypto.
+The program use web scrapping on https://coinmarketcap.com/ and can be late on price (I'm not responsable for spread)
 ## usage
 To compile the file, do
 ```bash
