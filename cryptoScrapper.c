@@ -41,7 +41,9 @@ void find_value(char* html,char* buffer) {
         int fin = matches[0].rm_eo;
         snprintf(buffer, fin - debut + 1, "%s", html + debut);
 	} else {
-		printf("ERROR: unfind value, regex error");
+		printf("ERROR: Unfind value, verify the crypto-currency.");
+		buffer="";
+		return;
 	}
 	regfree(&regex);
 }
@@ -65,8 +67,6 @@ void cut_span(char* buffer) {
 	int len =fin-debut;
 	buffer[len]='\0';
 	strncpy(buffer, buffer+debut, len);
-
-
 }
 
 
@@ -75,9 +75,9 @@ char* get_value(char* code) {
 	CURLcode res;
 	char* url=malloc(64);
 	if (!strcmp(code,"eth")) {url="https://coinmarketcap.com/fr/currencies/ethereum/";}
-	if (!strcmp(code,"btc")) {url="https://coinmarketcap.com/fr/currencies/bitcoin/";}
-	if (!strcmp(code,"sol")) {url="https://coinmarketcap.com/fr/currencies/solana/";}
-
+	else if (!strcmp(code,"btc")) {url="https://coinmarketcap.com/fr/currencies/bitcoin/";}
+	else if (!strcmp(code,"sol")) {url="https://coinmarketcap.com/fr/currencies/solana/";}
+	else {snprintf(url,60,"%s%s%s","https://coinmarketcap.com/fr/currencies/",code,"/");}
 	string chunk;
 	chunk.html = malloc(1);
 	chunk.size=0;
@@ -109,24 +109,44 @@ char* get_value(char* code) {
 
 int main(int argc, char** argv) {
 	char* buffer=malloc(64);
-	if (argc==2) {
-		if (!strcmp(argv[1],"eth") || !strcmp(argv[1],"ethereum")) {
-			buffer=get_value("eth");
-			printf(" %s",buffer);
-		}
-		if (!strcmp(argv[1],"btc") || !strcmp(argv[1],"bitcoin")) {
-			buffer=get_value("btc");
-			printf(" %s",buffer);
-			
-		}
-		if (!strcmp(argv[1],"sol") || !strcmp(argv[1], "solana")) {
-			buffer=get_value("sol");
-			printf("🟣 %s",buffer);
-		}
+	char* logo;
+	int trouve=0;
 
+	struct {
+        char *coin;
+        char *logo;
+    } coin_hashmap[] = {
+		{"eth",""},
+		{"ethereum",""},
+		{"btc",""},
+		{"bitcoin",""},
+		{"sol","🟣"},
+		{"solana","🟣"},
+	};
+
+	int len_coin_hashmap=sizeof(coin_hashmap)/sizeof(coin_hashmap[0]);
+
+	if (argc!=2) {
+		printf("Format: ./cryptoScrapper {coin}");
+		return 1;
 	}
-	printf("\n");
+	if (argc==2) {
+		int i=0;
+		while(!trouve && i<len_coin_hashmap) {
+			if (!strcmp(argv[1],coin_hashmap[i].coin)) {
+				buffer=get_value(argv[1]);
+				logo=coin_hashmap[i].logo;
+				trouve=1;
+			}
+			i++;
+		} 
+
+		if (!trouve) {
+			buffer=get_value(argv[1]);
+			logo="";
+		}
+		printf("%s  %s\n",logo,buffer);
+	} 
 	free(buffer);
 	return 0;
-
 }
