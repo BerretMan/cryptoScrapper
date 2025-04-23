@@ -1,10 +1,13 @@
-all: cryptoScrapper clean
+all: cryptoScrapper
 
-cryptoScrapper: cryptoScrapper.o
-	gcc -o cryptoScrapper cryptoScrapper.o -lcurl
+cryptoScrapper: cryptoScrapper.o fonction.o
+	gcc -o cryptoScrapper cryptoScrapper.o fonction.o -lcurl
+
+fonction.o: fonction.c
+	gcc -c fonction.c
 
 cryptoScrapper.o: cryptoScrapper.c
 	gcc -c cryptoScrapper.c
 
 clean:
-	rm -f prog *.o
+	rm -f cryptoScrapper *.o
