@@ -29,9 +29,8 @@ void find_value(char* html,char* buffer,char* type) {
     if (!strcmp(type,"valeur")){pattern="<span class=\"sc-65e7f566-0 WXGwg base-text\"[^>]*>([^<]*)</span>";}
     if (!strcmp(type,"variation")){pattern = "<div class=\"sc-65e7f566-0 enCfYh\"><div data-role=\"percentage-value\"[^>]*><p[^>]*><svg[^>]*><path[^>]*><\\/path><\\/svg>([0-9]+\\.[0-9]+)%"; }
 	if (!strcmp(type,"couleur")){pattern="<div class=\"sc-65e7f566-0 enCfYh\">.*?<p color=\"([^\"]+)";}
-	
-
 	if (regcomp(&regex, pattern, REG_EXTENDED)!=0) {
+
 		printf("error: compilation of regex failed!");
 		return;
 	}
@@ -85,4 +84,25 @@ char* get_html(char* code) {
 	free(chunk.html);
 	free(url);
 	return 0;	*/
+}
+
+
+void remove_space(char* string) {
+	int i=0;int j=0;
+	string[strlen(string)-5]= '\0';
+
+	while (string[i] != '\0') {
+
+		if (!((unsigned char)string[i] == 0xE2 || (unsigned char)string[i+1] == 0x80 || (unsigned char)string[i+2] == 0xAF)) {
+			string[j++]=string[i];
+		}else {
+			i+=2;
+		}
+		i++;
+
+		if(string[i]==',') {
+			string[i]='.';
+		}
+	}
+	string[j]='\0';
 }

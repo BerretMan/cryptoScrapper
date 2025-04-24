@@ -14,4 +14,7 @@ void find_value(char* html,char* buffer,char* type);
 
 char* get_html(char* code);
 
+void remove_space(char* string);
+
+
 #endif

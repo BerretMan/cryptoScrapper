@@ -10,6 +10,13 @@ To execute the file, do
 ```bash
 CryptoScrapper (code) (-option)
 ```
+## Option
+
+- -o: show only the value without any artifice 
+- -$: show price in USD.
+- -v: add variation of price in 1 day 
+
+
 
 ## Crypto supported
 Currently, only 4 cryptos have custom logo
