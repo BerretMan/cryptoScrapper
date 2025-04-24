@@ -1,5 +1,5 @@
 # cryptoScrapper
-A minimalist cli to get the pricce of some crypto.
+A minimalist cli to get the price of some crypto.
 The program use web scrapping on https://coinmarketcap.com/ and can be late on price (I'm not responsable for spread)
 ## usage
 To compile the file, do
@@ -8,17 +8,16 @@ make
 ```
 To execute the file, do
 ```bash
-CryptoScrapper (code)
+CryptoScrapper (code) (-option)
 ```
 
 ## Crypto supported
-Currently, only 3 cryptos have custom logo
+Currently, only 4 cryptos have custom logo
 | Crypto | Code | 
 |----------|----------|
 | Bitcoin  | btc   | 
 | Etheruem  | eth |
 | Solana   | sol   | 
+| Dogecoin   | doge   | 
 
-Other will have default logo
-
-
+Otherwise will have default logo
