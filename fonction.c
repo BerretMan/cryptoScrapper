@@ -27,8 +27,8 @@ void find_value(char* html,char* buffer,char* type) {
 	regmatch_t matches[2];
 	const char* pattern;
     if (!strcmp(type,"valeur")){pattern="<span class=\"sc-65e7f566-0 WXGwg base-text\"[^>]*>([^<]*)</span>";}
-    if (!strcmp(type,"whales")){pattern = "<div class=\"sc-65e7f566-0 enCfYh\"><div data-role=\"percentage-value\"[^>]*><p[^>]*><svg[^>]*><path[^>]*><\\/path><\\/svg>([0-9]+\\.[0-9]+)%"; }
-
+    if (!strcmp(type,"variation")){pattern = "<div class=\"sc-65e7f566-0 enCfYh\"><div data-role=\"percentage-value\"[^>]*><p[^>]*><svg[^>]*><path[^>]*><\\/path><\\/svg>([0-9]+\\.[0-9]+)%"; }
+	if (!strcmp(type,"couleur")){pattern="<div class=\"sc-65e7f566-0 enCfYh\">.*?<p color=\"([^\"]+)";}
 	
 
 	if (regcomp(&regex, pattern, REG_EXTENDED)!=0) {
@@ -48,13 +48,14 @@ void find_value(char* html,char* buffer,char* type) {
 	}
 	regfree(&regex);
 }
-char* get_value(char* code,char* type) {
+char* get_html(char* code) {
 	CURL* curl=curl_easy_init();
 	CURLcode res;
 	char* url=malloc(64);
 	if (!strcmp(code,"eth")) {url="https://coinmarketcap.com/fr/currencies/ethereum/";}
 	else if (!strcmp(code,"btc")) {url="https://coinmarketcap.com/fr/currencies/bitcoin/";}
 	else if (!strcmp(code,"sol")) {url="https://coinmarketcap.com/fr/currencies/solana/";}
+	else if (!strcmp(code,"doge")) {url="https://coinmarketcap.com/fr/currencies/dogecoin/";}
 	else {snprintf(url,60,"%s%s%s","https://coinmarketcap.com/fr/currencies/",code,"/");}
 	string chunk;
 	chunk.html = malloc(1);
@@ -73,17 +74,15 @@ char* get_value(char* code,char* type) {
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
 
 	res = curl_easy_perform(curl);
-	char* buffer = malloc(256); 
-    if(!strcmp(type,"valeur")) {
-        find_value(chunk.html,buffer,"valeur");
-        return buffer;
-    }
 
+	return chunk.html;	
+
+/*
     if(!strcmp(type,"whales")) {
         find_value(chunk.html,buffer,"whales");
         return buffer;
     }
 	free(chunk.html);
 	free(url);
-	return 0;	
+	return 0;	*/
 }

@@ -12,6 +12,6 @@ static size_t WritehtmlCallback(void *contents, size_t size, size_t nmemb, void 
 
 void find_value(char* html,char* buffer,char* type);
 
-char* get_value(char* code,char* type);
+char* get_html(char* code);
 
 #endif

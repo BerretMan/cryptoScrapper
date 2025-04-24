@@ -6,7 +6,12 @@
 #include "fonction.h"
 
 
+#define RED   "\x1B[31m"
+#define GREEN   "\x1B[32m"
+#define RESET "\x1B[0m"
+
 int main(int argc, char** argv) {
+	char* valeur=malloc(64);
 	char* buffer=malloc(64);
 	char* logo;
 	int trouve=0;
@@ -25,6 +30,8 @@ int main(int argc, char** argv) {
 		{"bitcoin",""},
 		{"sol","🟣"},
 		{"solana","🟣"},
+		{"dogecoin","󰩃"},
+		{"doge","󰩃"}
 	};
 
 	int len_coin_hashmap=sizeof(coin_hashmap)/sizeof(coin_hashmap[0]);
@@ -37,6 +44,8 @@ int main(int argc, char** argv) {
 	if (argc>=2) {
 
 		int i=0;
+
+		
 		while(!trouve && i<len_coin_hashmap) {
 			if (!strcmp(argv[1],coin_hashmap[i].coin)) {
 
@@ -45,22 +54,36 @@ int main(int argc, char** argv) {
 			}
 			i++;
 		} 
-		buffer=get_value(argv[1],"valeur");
+
 		if (!trouve) {
 			logo="";
 		}
-
+		
 	} 
 	
+	char* html=get_html(argv[1]);
+	
+    find_value(html,valeur,"valeur");
+	char* color=malloc(16);
 	for (int i=2;i<argc;i++) {
-		if(!strcmp(argv[i],"-w")) {
-			option_w=get_value(argv[1],"whales");
+		if(!strcmp(argv[i],"-v")) {
+		 	find_value(html,buffer,"variation");
+			find_value(html,color,"couleur");
+
+			if (!strcmp(color,"red")) {
+				snprintf(option_w, 64,"%s -%s%% (1d) %s", RED, buffer, RESET);
+			} else {
+				snprintf(option_w, 64,"%s +%s%% (1d) %s", GREEN, buffer, RESET);
+			}
 		}
 	}
-	snprintf(prompt, 128,"%s  %s  %s",logo,buffer,option_w);
+	snprintf(prompt, 128,"%s  %s %s",logo,valeur,option_w);
 	printf("%s\n",prompt);
 
 	free(buffer);
+	free(valeur);
+	free(option_w);
+	free(html);
 	free(prompt);
 	return 0;
 }
