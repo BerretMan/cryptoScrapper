@@ -8,6 +8,7 @@
 
 #define RED   "\x1B[31m"
 #define GREEN   "\x1B[32m"
+#define YELLOW   "\x1B[33m"
 #define RESET "\x1B[0m"
 
 int main(int argc, char** argv) {
@@ -18,21 +19,24 @@ int main(int argc, char** argv) {
 
 	char* prompt=malloc(128);
 	char* option_v=malloc(16);
-	char* option_w=malloc(16);
 
+	char* bitcoin_logo="\x1B[33m\x1B[0m";
+	char* ethereum_logo="\x1B[35m\x1B[0m";
+	char* solana_logo="\x1B[35m󰰢\x1B[0m";
+	char* dogecoin_logo="\x1B[33m󰩃\x1B[0m";
 
 	struct {
         char *coin;
         char *logo;
     } coin_hashmap[] = {
-		{"eth",""},
-		{"ethereum",""},
-		{"btc",""},
-		{"bitcoin",""},
-		{"sol","🟣"},
-		{"solana","🟣"},
-		{"dogecoin","󰩃"},
-		{"doge","󰩃"}
+		{"eth",ethereum_logo},
+		{"ethereum",ethereum_logo},
+		{"btc",bitcoin_logo},
+		{"bitcoin",bitcoin_logo},
+		{"sol",solana_logo},
+		{"solana",solana_logo},
+		{"dogecoin",dogecoin_logo},
+		{"doge",dogecoin_logo}
 	};
 
 	int len_coin_hashmap=sizeof(coin_hashmap)/sizeof(coin_hashmap[0]);
@@ -106,7 +110,7 @@ int main(int argc, char** argv) {
 		}
 
 	}
-	snprintf(prompt, 128,"%s  %s %s %s",logo,valeur,option_v,option_w);
+	snprintf(prompt, 128,"%s %s%s",logo,valeur,option_v);
 	printf("%s\n",prompt);
 
 	free(buffer);

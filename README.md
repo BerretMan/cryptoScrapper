@@ -1,4 +1,4 @@
-# cryptoScrapper
+![Crypto$crapper](image/crypto$crapper.png)
 A minimalist cli to get the price of some crypto.
 The program use web scrapping on https://coinmarketcap.com/ and can be late on price (I'm not responsable for spread)
 ## usage
