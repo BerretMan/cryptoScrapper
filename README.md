@@ -2,8 +2,9 @@
     <img src="image/logo.png", alt ="Crypto$crapper">
 </p><br/>
 
-A minimalist cli to get the price of some crypto.
-The program use web scrapping on https://coinmarketcap.com/ and can be late on price (I'm not responsable for spread)
+A minimalist CLI tool to fetch the price of cryptocurrency with web scraping from https://coinmarketcap.com/.
+Note: Prices may be delayed. 
+
 ## usage
 To compile the file, do
 ```bash
@@ -13,16 +14,19 @@ To execute the file, do
 ```bash
 CryptoScrapper (code) (-option)
 ```
+
+Note: for supported cryptocurrencies, both full-name and the code can be used. 
 ## Option
 
-- -o: show only the value without any artifice 
-- -$: show price in USD.
-- -v: add variation of price in 1 day 
+- -o: Display only the price without any formatting 
+- -$: Display price in USD.
+- -v: Show price and 24-hour variation of the cryptocurrencies.
 
 
 
 ## Crypto supported
-Currently, only 4 cryptos have custom logo
+Here's the list of all cryptocurrency with custom support and logo. For others, only urls name in coinmarketcap.com will works.
+
 | Crypto | Code | 
 |----------|----------|
 | Bitcoin  | btc   | 
@@ -30,4 +34,4 @@ Currently, only 4 cryptos have custom logo
 | Solana   | sol   | 
 | Dogecoin   | doge   | 
 
-Otherwise will have default logo
+Otherwise a default-logo will be used. 
