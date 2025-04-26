@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="image/crypto$crapper.png", alt ="Crypto$crapper">
+    <img src="image/logo.png", alt ="Crypto$crapper">
 </p><br/>
 
 A minimalist cli to get the price of some crypto.
