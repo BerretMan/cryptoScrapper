@@ -3,10 +3,11 @@
 #include <string.h>
 #include <curl/curl.h>
 #include <regex.h>
+#include <ctype.h>
 #include "fonction.h"
 
 
-//https://curl.se/libcurl/c/getinmemory.html
+
 static size_t WritehtmlCallback(void *contents, size_t size, size_t nmemb, void *userp)
 {
   size_t realsize = size * nmemb;
@@ -47,6 +48,7 @@ void find_value(char* html,char* buffer,char* type) {
 	}
 	regfree(&regex);
 }
+
 char* get_html(char* code) {
 	CURL* curl=curl_easy_init();
 	CURLcode res;
@@ -75,15 +77,6 @@ char* get_html(char* code) {
 	res = curl_easy_perform(curl);
 
 	return chunk.html;	
-
-/*
-    if(!strcmp(type,"whales")) {
-        find_value(chunk.html,buffer,"whales");
-        return buffer;
-    }
-	free(chunk.html);
-	free(url);
-	return 0;	*/
 }
 
 
@@ -105,4 +98,10 @@ void remove_space(char* string) {
 		}
 	}
 	string[j]='\0';
+}
+
+void lower_string(char* string) {
+	for (int i=0;string[i];i++) {
+		string[i] = tolower(string[i]);
+	}
 }

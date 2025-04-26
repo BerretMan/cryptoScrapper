@@ -32,6 +32,7 @@ Here's the list of all cryptocurrency with custom support and logo. For others, 
 | Bitcoin  | btc   | 
 | Etheruem  | eth |
 | Solana   | sol   | 
+| XRP   | xrp   | 
 | Dogecoin   | doge   | 
 
 Otherwise a default-logo will be used. 

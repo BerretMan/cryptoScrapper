@@ -24,6 +24,7 @@ int main(int argc, char** argv) {
 	char* ethereum_logo="\x1B[35m\x1B[0m";
 	char* solana_logo="\x1B[35m󰰢\x1B[0m";
 	char* dogecoin_logo="\x1B[33m󰩃\x1B[0m";
+	char* xrp_logo="";
 
 	struct {
         char *coin;
@@ -36,7 +37,8 @@ int main(int argc, char** argv) {
 		{"sol",solana_logo},
 		{"solana",solana_logo},
 		{"dogecoin",dogecoin_logo},
-		{"doge",dogecoin_logo}
+		{"doge",dogecoin_logo},
+		{"xrp",xrp_logo}
 	};
 
 	int len_coin_hashmap=sizeof(coin_hashmap)/sizeof(coin_hashmap[0]);
@@ -50,6 +52,7 @@ int main(int argc, char** argv) {
 
 		int i=0;
 
+		lower_string(argv[1]);
 		
 		while(!trouve && i<len_coin_hashmap) {
 			if (!strcmp(argv[1],coin_hashmap[i].coin)) {
